@@ -2,16 +2,15 @@ from notifier import Notificador, NotificadorEmail, NotificadorSMS, NotificadorW
 
 
 # -------------------------------------------------------------------------
-# Entregable 2 (Semana 3): Crear una función fábrica (Factory Method)
-# Objetivo: Centralizar la creación y encapsular las condiciones if/elif,
-# evitando que los condicionales se dispersen por el resto del sistema.
+# Entregable 2 (Semana 3): Fábrica (Factory Method)
+# Centraliza y encapsula la instanciación de objetos.
+# Cumple con el Principio Abierto/Cerrado (OCP): evita condicionales dispersos.
 # -------------------------------------------------------------------------
 class NotificadorFactory:
     @staticmethod
     def crear_notificador(tipo: str) -> Notificador:
         tipo_normalizado = tipo.strip().lower()
 
-        # La fábrica decide qué clase concreta instanciar según el parámetro
         if tipo_normalizado == "email":
             return NotificadorEmail()
         elif tipo_normalizado == "sms":
@@ -19,5 +18,4 @@ class NotificadorFactory:
         elif tipo_normalizado == "whatsapp":
             return NotificadorWhatsApp()
         else:
-            # Control de entradas inválidas sin romper el flujo del cliente
             raise ValueError(f"Tipo de notificador no válido: {tipo}")
